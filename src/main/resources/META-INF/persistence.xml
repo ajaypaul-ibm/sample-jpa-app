@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+    <persistence-unit name="my-persistence-unit">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.example.model.MyEntity</class>
+        <class>com.example.model.Coordinate</class>
+        <class>com.example.model.Package</class>
+        <properties>
+            <!-- Update the JDBC URL for DB2 -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:db2://localhost:50000/testdb"/>
+            <!-- Update the JDBC user and password -->
+            <property name="javax.persistence.jdbc.user" value="db2inst1"/>
+            <property name="javax.persistence.jdbc.password" value="password"/>
+            <!-- Update the JDBC driver class for DB2 -->
+            <property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+        </properties>
+    </persistence-unit>
+</persistence>
