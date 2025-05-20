@@ -78,6 +78,17 @@ public class CoordinateRepository {
         }
     }
     
-
+    public void printTallPackages(float minHeight) {
+        List<Package> tallPackages = entityManager
+                .createQuery("SELECT p FROM Package p WHERE p.height > :height ORDER BY p.height DESC", Package.class)
+                .setParameter("height", minHeight)
+                .getResultList();
+    
+        System.out.println("Tall packages:");
+        for (Package pkg : tallPackages) {
+            System.out.println(pkg);
+        }
+    }
+    
     // Other methods as needed
 }
