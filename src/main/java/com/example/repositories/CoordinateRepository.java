@@ -51,7 +51,8 @@ public class CoordinateRepository {
             throw e; // Re-throw the exception after rollback
         }
     }
-    
+
+    //Test case for deletion of wide packages
     public void deleteWidePackages(float widthThreshold) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
