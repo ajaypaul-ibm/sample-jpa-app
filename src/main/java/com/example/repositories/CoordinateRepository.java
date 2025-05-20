@@ -78,6 +78,7 @@ public class CoordinateRepository {
         }
     }
     
+    //print tall packages test case
     public void printTallPackages(float minHeight) {
         List<Package> tallPackages = entityManager
                 .createQuery("SELECT p FROM Package p WHERE p.height > :height ORDER BY p.height DESC", Package.class)
