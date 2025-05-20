@@ -52,5 +52,43 @@ public class CoordinateRepository {
         }
     }
 
+    //Test case for deletion of wide packages
+    public void deleteWidePackages(float widthThreshold) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+    
+        try {
+            List<Package> widePackages = entityManager
+                    .createQuery("SELECT p FROM Package p WHERE p.width > :width", Package.class)
+                    .setParameter("width", widthThreshold)
+                    .getResultList();
+    
+            System.out.println("Wide packages to delete:");
+            for (Package pkg : widePackages) {
+                System.out.println(pkg);
+                entityManager.remove(entityManager.contains(pkg) ? pkg : entityManager.merge(pkg));
+            }
+    
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
+    }
+    
+    public void printTallPackages(float minHeight) {
+        List<Package> tallPackages = entityManager
+                .createQuery("SELECT p FROM Package p WHERE p.height > :height ORDER BY p.height DESC", Package.class)
+                .setParameter("height", minHeight)
+                .getResultList();
+    
+        System.out.println("Tall packages:");
+        for (Package pkg : tallPackages) {
+            System.out.println(pkg);
+        }
+    }
+    
     // Other methods as needed
 }
